@@ -1,0 +1,14 @@
+body {
+	padding-top: 40px;
+}
+
+.jumbotron-home {
+	background: #B91119 url(http://www.aktenterprises.com/img/home-bg.jpg) center center no-repeat;
+	height: 350px;
+
+	.h1, h1,
+	.h2, h2 {
+		color: #fff;
+		text-shadow: $carousel-text-shadow;
+	}
+}

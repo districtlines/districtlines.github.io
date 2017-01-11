@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="">
+		<title>Blind Fulfillment</title>
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://use.fontawesome.com/77d973d20b.js"></script>
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>`
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="jumbotron">
+			<div class="container text-center">
+				<h1>District Lines</h1>
+				<h3>Blind Fulfillment Guide</h3>
+				<hr>
+				<p>This is a guide to how to create a the import file for the development team.</p>
+				<a href="https://www.dropbox.com/s/t7zqod8h5tjx9da/Fulfillment-Template.xlsx?dl=1" class="btn btn-success"><i class="fa fa-download"></i> Download the Template</a>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="btn-group btn-group-justified" role="group">
+				<a href="#sheet-orders" class="btn btn-info" role="button">Orders</a>
+				<a href="#sheet-items" class="btn btn-info" role="button">Items</a>
+				<a href="#sheet-legend" class="btn btn-info" role="button">Legend</a>
+			</div>
+		</div>
+
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12">
+					<h2 id="sheet-orders">Orders</h2>
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Field</th>
+								<th>Required?</th>
+								<th width="65%">Description</th>
+								<th>Options</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>shipment_id</td>
+								<td>No</td>
+								<td>This field is used to track the order through the whole process. It ties an order to items within the shipment. The import system will supply the shipment_id.</td>
+								<td>Leave blank</td>
+							</tr>
+							<tr>
+								<td>order_id</td>
+								<td>Yes</td>
+								<td>This is usually an order number/ID that is used as a reference back to the originating shopping system (shopify, magento, woocommerce...etc). In the event the originating system needs an export we can tie our system to the original source system. If an order ID is not provided please see the notes in the <a href="#sheet-legend">Legend section</a>.</td>
+								<td><a href="#sheet-legend">Legend options</a></td>
+							</tr>
+							<tr>
+								<td>merchant_id</td>
+								<td>Yes</td>
+								<td>This is an ID number to reference the merchant account associated with this fulfillment.</td>
+								<td>
+									<ul>
+										<li><strong>1</strong> - Dan and Phil</li>
+										<li><strong>2</strong> - The Devil Wears Prada</li>
+										<li><strong>4</strong> - SJ - Founders</li>
+										<li><strong>5</strong> - Vegan Black Metal Chef</li>
+										<li><strong>6</strong> - District Lines</li>
+										<li><strong>7</strong> - Trampled by Turtles</li>
+										<li><strong>8</strong> - Meytal Cohen</li>
+										<li><strong>9</strong> - Kian and JC</li>
+										<li><strong>10</strong> - Wargaming</li>
+										<li><strong>11</strong> - Jukebox The Ghost</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td>currency</td>
+								<td>Yes</td>
+								<td>The 3 letter currency code the order was sold through. This is necessary when it comes to CN22 forms where we have to declare a value to the shipment.</td>
+								<td>
+									<ul>
+										<li>USD</li>
+										<li>EUR</li>
+										<li>GBP</li>
+									</ul>
+								</td>
+							</tr>
+							<tr>
+								<td>total</td>
+								<td>Yes</td>
+								<td>The retail value of the whole shipment. Necessary when it comes to the CN22 forms where we have to declare a value to the shipment. This should be a decimal value with <u><strong>NO</strong></u> currency symbol in the front.</td>
+								<td>e.g.: 5.00 or 100.35</td>
+							</tr>
+							<tr>
+								<td>order_email</td>
+								<td>Yes</td>
+								<td>This is the customer's email address.</td>
+								<td>e.g.: tobiasFunke@gmail.com</td>
+							</tr>
+							<tr>
+								<td>shipping_name</td>
+								<td>Yes</td>
+								<td>The full name of the customer.</td>
+								<td>e.g.: Tobias Funke</td>
+							</tr>
+							<tr>
+								<td>shipping_company</td>
+								<td>No</td>
+								<td>The company name or "c/o" line of the customer.</td>
+								<td>e.g.: c/o Gobias Industries LLC</td>
+							</tr>
+							<tr>
+								<td>shipping_address1</td>
+								<td>Yes</td>
+								<td>The address line 1 of the customer's shipping address. This <u><strong>should not</strong></u> include unit or apartment numbers.</td>
+								<td>e.g.: 123 Sudden Valley Way</td>
+							</tr>
+							<tr>
+								<td>shipping_address2</td>
+								<td>Maybe</td>
+								<td>The address line 2 of the customer's shipping address. This usually is for unit or apartment numbers. It is required if the address has an Address Line 2.</td>
+								<td>e.g.: Unit 1337</td>
+							</tr>
+							<tr>
+								<td>shipping_city</td>
+								<td>Yes</td>
+								<td>The city of the customer's address.</td>
+								<td>e.g.: Newport Beach</td>
+							</tr>
+							<tr>
+								<td>shipping_zip</td>
+								<td>Yes</td>
+								<td>The zip/postal code of the customer's address.</td>
+								<td>e.g.: 92661 or 92661-1324 (zip + 4)</td>
+							</tr>
+							<tr>
+								<td>shipping_province</td>
+								<td>Yes</td>
+								<td>State or province of the customer's address. If within the US it needs to be the 2 letter abbreviated state code.</td>
+								<td>e.g.: CA, FL, GA, RI, NY, NJ...etc</td>
+							</tr>
+							<tr>
+								<td>shipping_country</td>
+								<td>Yes</td>
+								<td>The ISO 3166 country code for the country of the customer's address.</td>
+								<td>Get the ALPHA-2 ISO codes from here: <a href="http://www.iso.org/iso/country_codes" target="_blank">ISO Codes</a>. e.g.: US, CA, GB, DE...etc</td>
+							</tr>
+							<tr>
+								<td>shipping_phone</td>
+								<td>Maybe</td>
+								<td>The customer's phone number. This is used by the shipment service if they need to reach the customer. If no phone number is provided please use our District Lines support number.</td>
+								<td>e.g.: 1-877-739-1173</td>
+							</tr>
+							<tr>
+								<td>shipping_method</td>
+								<td>Yes</td>
+								<td>The numerical value of the method this shipment should go out as. These are predefined shipment types. If the shipment method is not present, please contact the Development team to discuss.</td>
+								<td>
+									<ul>
+										<li><strong>1</strong> - MediaMail</li>
+										<li><strong>2</strong> - SurePost</li>
+										<li><strong>3</strong> - UPSMI</li>
+									</ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<hr>
+
+					<h2 id="sheet-items">Items</h2>
+					<div class="alert alert-info">You will create at least one row per order. If the shipment includes multiple items for pickers, then create one row per item. The order_id is used to combine an order with all the shippable items.</div>
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Field</th>
+								<th>Required?</th>
+								<th width="65%">Description</th>
+								<th>Options</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>id</td>
+								<td>No</td>
+								<td>This field should be left blank. The import system will generate this value.</td>
+								<td>Leave blank</td>
+							</tr>
+							<tr>
+								<td>shipment_id</td>
+								<td>No</td>
+								<td>This will match the shipment_id from the order. Once the order is imported into the fulfillment system this value will be provided.</td>
+								<td>Leave blank</td>
+							</tr>
+							<tr>
+								<td>order_id</td>
+								<td>Yes</td>
+								<td>This value should match the order_id field from the <a href="#sheet-orders">order sheet</a> which ties together this item or items with the order information.</td>
+								<td>-</td>
+							</tr>
+							<tr>
+								<td>qty</td>
+								<td>Yes</td>
+								<td>The amount to be packed for this item. Numerical whole number.</td>
+								<td>e.g.: 1</td>
+							</tr>
+							<tr>
+								<td>name</td>
+								<td>Yes</td>
+								<td>The name of the item to be packed. This shows on the packing slip.</td>
+								<td>e.g.: Magic Is For Real Crewneck</td>
+							</tr>
+							<tr>
+								<td>price</td>
+								<td>Yes</td>
+								<td>The retail value of the item. Necessary when it comes to the CN22 forms where we have to declare a value to the shipment. This should be a decimal value with <u><strong>NO</strong></u> currency symbol in the front.</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>sku</td>
+								<td>No</td>
+								<td>The unique SKU number for the item.</td>
+								<td>e.g.: 19441-29-63</td>
+							</tr>
+							<tr>
+								<td>size</td>
+								<td>Yes</td>
+								<td>The size of the item.</td>
+								<td>e.g.; Small, Hat, Book...etc</td>
+							</tr>
+							<tr>
+								<td>image</td>
+								<td>No</td>
+								<td>The file name of the item image. Useful if the item is very similar and a photo on the packing slip will help packers pick the correct item. Please supply the image file with the Development team.</td>
+								<td>e.g.: gob-magic-is-real.jpg</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<hr>
+
+					<h2 id="sheet-legend">Legend</h2>
+					<div class="alert alert-info">
+						This section is used to generate an order number for the shipments if the originating data source does not have order numbers. This helps us tie our fulfillment system to the originating source's system.
+					</div>
+					<div class="alert alert-warning">
+						Only change the 2<sup>nd</sup> row of data on the Legend sheet. The rest of the rows are already setup with functions to generate the appropriate format.
+						<br>
+						When you generate the order_id you can use the Excel functions to copy them over to the appropriate Orders and Items sheet. The template has an example of this being done on the Order sheet.
+					</div>
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Field</th>
+								<th width="65%">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>prefix</td>
+								<td>
+									This will be the prefix to the order number. This needs to be either an alpha numeric character.
+									<br>
+									It <strong><u>cannot</u></strong> start with a 0 or contain any special characters (i.e.: <code>~`-=[]\;',./!@#$%^&*()_+{}:"<>?|</code>)
+								</td>
+							</tr>
+							<tr>
+								<td>numbering</td>
+								<td>Enter a numeric value that this number should start at. By default it will start with one. If you want it to start at 355 then type 355 in the 2<sup>nd</sup> row.</td>
+							</tr>
+							<tr>
+								<td>combined</td>
+								<td><strong><u>Do not touch</u></strong> - This is is an Excel formula that will generate the final order number in sequence.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</body>
+</html>

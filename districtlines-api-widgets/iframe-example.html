@@ -9,8 +9,14 @@
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://districtlines.s3.amazonaws.com/js/prismjs/prism.okaidia.css">
 	</head>
 	<body>
+		<style>
+			.prism-show-language-label {
+				display: none;
+			}
+		</style>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -38,8 +44,34 @@
 
 			<div class="row">
 				<div class="col-xs-12">
-					<h3>My Store</h3>
-					<div class="embed-responsive embed-responsive-16by9">
+					<h3>Preview and generate:</h3>
+					<form id="generate-code" action="#" method="post" class="form-inline">
+						<div class="form-group">
+							<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+							<div class="input-group">
+								<div class="input-group-addon">Genre ID</div>
+								<input type="text" class="form-control" id="genre-id" placeholder="Enter your genre ID" required="true">
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="show-header" checked> Show Header
+								</label>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Generate Preview & Code</button>
+					</form>
+
+					<hr>
+
+					<h3>The code:</h3>
+					<pre><code class="language-markup" id="code-output"></code></pre>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>My Widget Preview:</h3>
+					<div class="embed-responsive embed-responsive-16by9 active-code">
 						<iframe style="border:none;" border="0" width="798" height="500" src="https://www.districtlines.com/app/shop.php?storeID=2166"></iframe>
 					</div>
 				</div>
@@ -55,6 +87,44 @@
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://districtlines.s3.amazonaws.com/js/prismjs/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.min.js"></script>
+		<script>
+			(function($) {
+
+				function generateCodePreview(elm) {
+					$('#code-output').text(elm.prop('outerHTML'));
+					$('.active-code').html(elm);
+				}
+
+				var $elm = $('<iframe>').prop({
+					'style' : "border:0",
+					'width' : '798',
+					'height' : '500',
+					'src' : 'https://www.districtlines.com/app/shop.php?storeID=2166&header=1'
+				});
+
+				generateCodePreview($elm);
+
+				$('#generate-code').on('submit', function() {
+					var genreID = $('#genre-id').val();
+					var showHeader = $('#show-header').is(":checked");
+					console.log(showHeader);
+
+					var $elm = $('<iframe>').prop({
+						'style' : "border:0",
+						'width' : '798',
+						'height' : '500',
+						'src' : 'https://www.districtlines.com/app/shop.php?storeID='+genreID+'&header=' + (showHeader === true ? 1 : 0)
+					});
+
+					generateCodePreview($elm);
+					Prism.highlightAll();
+					return false;
+				});
+				//&lt;iframe style="border:none;" border="0" width="798" height="500" src="https://www.districtlines.com/app/shop.php?storeID=2166&gt;&lt;/iframe&gt;
+			})(jQuery);
+		</script>
 	</body>
 </html>

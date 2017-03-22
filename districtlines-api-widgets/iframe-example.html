@@ -91,7 +91,7 @@
 			(function($) {
 
 				function generateCodePreview(elm) {
-					$('#code-output').text(elm.prop('outerHTML'));
+					$('#code-output').text( elm.prop('outerHTML').replace('&amp;', '&') );
 					$('.active-code').html(elm);
 				}
 

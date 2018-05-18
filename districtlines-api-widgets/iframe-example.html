@@ -41,7 +41,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
-					<h3 id="generate">Generate & Preview:</h3>
+					<h3 id="generate">Options:</h3>
 					<form id="generate-code" action="#" method="post" class="form-inline">
 						<div class="form-group">
 							<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
@@ -51,10 +51,11 @@
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" id="show-header" checked> Show Header
+									<input type="checkbox" id="show-header" checked> Show Header <em>(image above products)</em>
 								</label>
 							</div>
 						</div>
+						<br><br>
 						<button type="submit" class="btn btn-primary">Generate Preview & Code</button>
 					</form>
 
@@ -120,6 +121,12 @@
 					Prism.highlightAll();
 					return false;
 				});
+				var urlParams = new URLSearchParams(window.location.search);
+				if(urlParams.has('s')) {
+					$('#genre-id').val(urlParams.get('s'));
+					$('#genre-id').parent().hide();
+					$('#generate-code').trigger('submit');
+				}
 				//&lt;iframe style="border:none;" border="0" width="798" height="500" src="https://www.districtlines.com/app/shop.php?storeID=2166&gt;&lt;/iframe&gt;
 			})(jQuery);
 		</script>
